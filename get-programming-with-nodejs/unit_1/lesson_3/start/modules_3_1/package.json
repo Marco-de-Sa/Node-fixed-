@@ -1,0 +1,14 @@
+{
+  "name": "modules_3_1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "messages.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marco de Sá",
+  "license": "ISC",
+  "dependencies": {
+    "http-status-codes": "^2.2.0"
+  }
+}
