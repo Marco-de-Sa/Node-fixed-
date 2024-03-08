@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
 
+// connects to my_database in mongo db
 mongoose.connect('mongodb://localhost/my_database',{useNewUrlParser: true})
 
 const app = new express()
@@ -32,6 +33,8 @@ app.listen(4000,()=>{
     console.log('App listening on port 4000')
 })
 
+
+// the following are routes
 app.get('/',async (req,res) =>{
     const blogposts = await BlogPost.find({})
     console.log(blogposts)
