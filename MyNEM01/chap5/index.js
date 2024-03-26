@@ -1,22 +1,76 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/mydatabase', {useNewUrlParser:true})
+const express = require('express')
 const path = require('path')
-const express = require('express') // require express module
-const app = express() // calls express function to start new Express app
+const mongoose = require('mongoose')
+
+// connects to my_database in mongo db
+mongoose.connect('mongodb://localhost/my_database',{useNewUrlParser: true})
+
+const app = new express()
+const ejs = require('ejs')
+const { resourceUsage } = require('process')
+
+const fileUpload = require('express-fileupload')
+
+const BlogPost = require('./models/BlogPost')
+
+app.set('view engine','ejs')
+
+const validateMiddleWare = (req,res,next) =>{
+    if(req.files == null || req.body.title == null){
+        return res.redirect('/posts/new')
+    }
+    next()
+}
+
+
 app.use(express.static('public'))
+app.use(express.json())
+app.use(express.urlencoded())
+app.use(fileUpload())
+app.use('/posts/store',validateMiddleWare)
 
-app.listen(3000, () => {
-    console.log("App listening on port 3000")
+app.listen(4000,()=>{
+    console.log('App listening on port 4000')
 })
 
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'index.html'))
+
+// the following are routes
+app.get('/',async (req,res) =>{
+    const blogposts = await BlogPost.find({})
+    console.log(blogposts)
+    res.render('index',{
+        blogposts
+    })
 })
 
-app.get('/about', (req, res) => { // called when request to /about comes in
-    res.sendFile(path.resolve(__dirname, 'about.html'))
+app.get('/about',(req,res) =>{
+    res.render('about')
 })
 
-app.get('/contact', (req, res) => { //called when request to /contact comes
-    res.sendFile(path.resolve(__dirname, 'contact.html'))
+app.get('/contact',(req,res) =>{
+    res.render('contact')
+})
+
+app.get('/post/:id',async (req,res) =>{
+    const blogpost = await BlogPost.findById(req.params.id)
+    res.render('post',{
+        blogpost
+    })
+})
+
+app.get('/posts/new',(req,res) =>{
+    res.render('create')
+})
+
+app.post('/posts/store',async (req,res) =>{    
+    let image = req.files.image
+    image.mv(path.resolve(__dirname,'public/img',image.name),
+        async (error)=>{
+            await BlogPost.create({
+                ...req.body,
+                image:'/img/' + image.name
+            })
+            res.redirect('/')
+        })
+
 })
