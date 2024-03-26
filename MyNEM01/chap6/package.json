@@ -94,7 +94,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Marco",
+  "author": "Marco de Sá",
   "license": "ISC",
   "description": ""
 }
