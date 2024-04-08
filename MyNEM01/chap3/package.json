@@ -4,7 +4,7 @@
   "description": "gkx kx gnd ;z3,zbd9mxl6 vlf 3nz;gdf w",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Marco de Sá",
