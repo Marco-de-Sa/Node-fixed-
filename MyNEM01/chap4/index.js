@@ -1,6 +1,10 @@
 const path = require('path')
 const express = require('express') // require express module
 const app = new express() // calls express function to start new Express app
+const ejs = require('ejs')
+
+app.set('view engine','ejs')
+
 app.use(express.static('public'))
 
 app.listen(3000, () => {
