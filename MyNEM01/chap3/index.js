@@ -11,10 +11,12 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'index.html'))
 })
 
-app.get('/about', (req, res) => { // called when request to /about comes in
-    res.sendFile(path.resolve(__dirname, 'about.html'))
+app.get('/about', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'pages/about.html'))
 })
-
-app.get('/contact', (req, res) => { //called when request to /contact comes
-    res.sendFile(path.resolve(__dirname, 'contact.html'))
+app.get('/contact', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'pages/contact.html'))
+})
+app.get('/post', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'pages/post.html'))
 })
