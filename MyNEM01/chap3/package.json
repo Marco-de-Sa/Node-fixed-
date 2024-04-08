@@ -1,0 +1,17 @@
+{
+  "name": "chap2",
+  "version": "1.0.0",
+  "description": "gkx kx gnd ;z3,zbd9mxl6 vlf 3nz;gdf w",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marco de Sá",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {}
+}
