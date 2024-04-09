@@ -3,7 +3,7 @@ const path = require("path");
 const app = new express();
 const ejs = require("ejs");
 const mongoose = require("mongoose");
-const BlogPost = require('./models/BlogPost')
+const BlogPost = require('./models/BlogPost.js')
 
 mongoose.connect("mongodb://127.0.0.1/my_database", { useNewUrlParser: true });
 
@@ -43,17 +43,10 @@ app.get("/posts/new", (req, res) => {
   res.render("create");
 });
 
-app.post("/posts/store", async (req, res) => { //used to create records on server
-  //model creates a new doc with browser data
- await BlogPost.create(req.body) 
-  .then((blogpost) => {
-    res.redirect("/"); 
-  }) //req.body has the browser form data
-  
-  .catch((error) => {
-    console.log(error);
-  });
- });
+app.post('/posts/store', async (req, res) => {
+  await BlogPost.create(req.body)
+  res.redirect('/')
+})
 
 app.listen(3000, () => {
   console.log("App listening on port 3000");
