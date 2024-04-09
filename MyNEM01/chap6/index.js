@@ -28,6 +28,10 @@ app.get("/contact", (req, res) => {
   res.render("contact");
 });
 
+app.get("/post", (req, res) => {
+  res.render("post")
+});
+
 app.get("/post/:id", async (req, res) => {
   const blogpost = await BlogPost.findById(req.params.id)
   res.render("post", {

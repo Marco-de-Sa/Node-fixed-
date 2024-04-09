@@ -21,49 +21,30 @@
       </div>
     </header>
     <!-- Main Content-->
-    <main class="mb-4">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <form action="/posts/store" method="POST">
-              <div class="control-group">
-                <div class="form-group floating-label-form-group controls">
-                  <label>Title</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Title"
-                    id="title"
-                    name="title"
-                  />
-                </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <form action="/posts/store" method="POST">
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Title</label>
+                <input type="text" class="form-control" placeholder="Title" id="title" name=”title”>
               </div>
-              <div class="control-group">
-                <div class="form-group floating-label-form-group controls">
-                  <label>Description</label>
-                  <textarea
-                    rows="5"
-                    class="form-control"
-                    id="body"
-                    name="body"
-                  ></textarea>
-                </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Description</label>
+                <textarea rows="5" class="form-control" id="body" name=”body”></textarea>
               </div>
-              <br />
-              <div class="form-group">
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  id="sendMessageButton"
-                >
-                  Send
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+            </div>
+          </form>
         </div>
       </div>
-    </main>
+    </div>
     <!-- Footer-->
     <%- include('layouts/footer') -%> 
     <%- include('layouts/scripts') -%>
