@@ -7,7 +7,14 @@ const BlogPost = require('./models/BlogPost.js');
 const fileUpload = require('express-fileupload');
 // create a new Express application
 const app = new express();
-const newPostController = require('./controllers/newPost')
+
+//controller stuff
+const newPostController = require('./controllers/newPost');
+const homeController = require('./controllers/home');
+const getPostController = require('./controllers/getPost');
+const storePostController = require('./controllers/storePost');
+
+//
 
 // allows the program to read static files from the public folder
 app.use(express.static('public'));
@@ -38,12 +45,7 @@ app.use('/posts/store', validateMiddleware);
 app.set('view engine', 'ejs');
 mongoose.connect('mongodb://127.0.0.1/my_database', {useNewUrlParser: true});
 
-app.get('/', async (req, res) => {
-    const blogposts = await BlogPost.find({});
-    res.render('index', {
-        blogposts
-    });
-});
+app.get('/', homeController);
 
 app.get('/about', (req, res) => {
     res.render('about');
@@ -53,21 +55,11 @@ app.get('/contact', (req, res) => {
     res.render('contact');
 });
 
-app.get('/post/:id', async (req, res) => {
-    const blogpost = await BlogPost.findById(req.params.id)
-    res.render('post', { blogpost });
-});
+app.get('/post/:id', getPostController);
 
-app.get('/posts/new',newPostController)
+app.get('/posts/new', newPostController);
 
-app.post('/posts/store', (req, res) => {
-    let image = req.files.image;
-    image.mv(path.resolve(__dirname, 'public/img', image.name), async (error) => {
-        await BlogPost.create({...req.body, image: '/img/' + image.name})
-        .then(res.redirect('/'))
-        .catch(error => { console.log(error)});
-    });
-});
+app.post('/posts/store', storePostController);
 
 app.listen(3000, () => {
     console.log("App listening on port 3000");
