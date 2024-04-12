@@ -7,6 +7,8 @@ const BlogPost = require('./models/BlogPost.js');
 const fileUpload = require('express-fileupload');
 // create a new Express application
 const app = new express();
+const newPostController = require('./controllers/newPost')
+
 // allows the program to read static files from the public folder
 app.use(express.static('public'));
 // the next 2 functions enable the app to handle POST requests
@@ -56,9 +58,7 @@ app.get('/post/:id', async (req, res) => {
     res.render('post', { blogpost });
 });
 
-app.get('/posts/new', (req, res) => {
-    res.render('create');
-});
+app.get('/posts/new',newPostController)
 
 app.post('/posts/store', (req, res) => {
     let image = req.files.image;
