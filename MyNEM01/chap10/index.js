@@ -3,6 +3,7 @@ const path = require('path');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
 const BlogPost = require('./models/BlogPost.js');
+const User = require('./models/User');
 // allowing files to be uploaded and handled
 const fileUpload = require('express-fileupload');
 // create a new Express application
@@ -13,6 +14,8 @@ const newPostController = require('./controllers/newPost');
 const homeController = require('./controllers/home');
 const getPostController = require('./controllers/getPost');
 const storePostController = require('./controllers/storePost');
+const newUserController = require('./controllers/newUser')
+const storeUserController = require('./controllers/storeUser')
 //
 
 //
@@ -32,15 +35,6 @@ const customMiddleware = (req, res, next) => {
     next();
 }
 app.use(customMiddleware);
-
-// validates input from user
-// if input fields are empty, redirect to /posts/new
-// const validateMiddleware = (req, res, next) => {
-//     if (req.files == null || req.body.title == null) {
-//         return res.redirect('/posts/new');
-//     }
-//     next();
-// }
 
 // With app.set('view engine','ejs'), we tell Express to use EJS as our templating engine, 
 // that any file ending in .ejs should be rendered with the EJS package.
@@ -64,6 +58,10 @@ app.get('/posts/new', newPostController);
 app.use('/posts/store', validateMiddleware);
 
 app.post('/posts/store', storePostController);
+
+app.get('/auth/register', newUserController)
+
+app.post('/users/register', storeUserController)
 
 app.listen(3000, () => {
     console.log("App listening on port 3000");
