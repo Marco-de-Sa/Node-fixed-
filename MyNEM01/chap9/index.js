@@ -13,7 +13,10 @@ const newPostController = require('./controllers/newPost');
 const homeController = require('./controllers/home');
 const getPostController = require('./controllers/getPost');
 const storePostController = require('./controllers/storePost');
+//
 
+//
+const validateMiddleware = require("./middleware/validateMiddleware");
 //
 
 // allows the program to read static files from the public folder
@@ -32,13 +35,12 @@ app.use(customMiddleware);
 
 // validates input from user
 // if input fields are empty, redirect to /posts/new
-const validateMiddleware = (req, res, next) => {
-    if (req.files == null || req.body.title == null) {
-        return res.redirect('/posts/new');
-    }
-    next();
-}
-app.use('/posts/store', validateMiddleware);
+// const validateMiddleware = (req, res, next) => {
+//     if (req.files == null || req.body.title == null) {
+//         return res.redirect('/posts/new');
+//     }
+//     next();
+// }
 
 // With app.set('view engine','ejs'), we tell Express to use EJS as our templating engine, 
 // that any file ending in .ejs should be rendered with the EJS package.
@@ -58,6 +60,8 @@ app.get('/contact', (req, res) => {
 app.get('/post/:id', getPostController);
 
 app.get('/posts/new', newPostController);
+
+app.use('/posts/store', validateMiddleware);
 
 app.post('/posts/store', storePostController);
 
