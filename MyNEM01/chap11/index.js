@@ -53,7 +53,7 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/posts/new',authMiddleware, newPostController); // renders the create page
-app.use('/posts/store', validateMiddleware); // validate user input for new post
+app.post('/posts/store', authMiddleware, storePostController); // validate user input for new post
 app.post('/posts/store', storePostController); // saves the post to the database
 app.get('/post/:id', getPostController); // renders the post page
 
