@@ -16,6 +16,7 @@ const newUserController = require('./controllers/newUser');
 const storeUserController = require('./controllers/storeUser');
 const loginController = require('./controllers/login');
 const loginUserController = require('./controllers/loginUser');
+const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticatedMiddleware')
 
 //Middleware
 const validateMiddleware = require('./middleware/validationMiddleware');
@@ -57,13 +58,13 @@ app.post('/posts/store', authMiddleware, storePostController); // validate user 
 app.post('/posts/store', storePostController); // saves the post to the database
 app.get('/post/:id', getPostController); // renders the post page
 
-app.get('/auth/register', newUserController); // renders the register page
+app.get('/auth/register', redirectIfAuthenticatedMiddleware, newUserController); // renders the register page
 // (validate user input)
-app.post('/users/register', storeUserController); // saves the user to the database
+app.post('/users/register', redirectIfAuthenticatedMiddleware, storeUserController); // saves the user to the database
 
-app.get('/auth/login', loginController); // renders the login page
+app.get('/auth/login', redirectIfAuthenticatedMiddleware, loginController); // renders the login page
 // (validate user input)
-app.post('/users/login', loginUserController); // logs the user in to their account
+app.post('/users/login',redirectIfAuthenticatedMiddleware, loginUserController); // logs the user in to their account
 
 app.listen(3000, () => {
     console.log("App listening on port 3000");
