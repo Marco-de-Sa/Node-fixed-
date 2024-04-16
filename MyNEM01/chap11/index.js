@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 // create a new Express application
 const app = new express();
+const expressSession = require('express-session');
 
 // Controllers
 const homeController = require('./controllers/home');
