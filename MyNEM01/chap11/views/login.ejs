@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('layouts/header') -%>
-
     <body>
         <!-- Navigation-->
         <%- include('layouts/navbar') -%>
@@ -12,7 +11,6 @@
                         <div class="col-md-10 col-lg-8 col-xl-7">
                             <div class="page-heading">
                                 <h1>Login</h1>
-                                <span class="subheading">Have questions? I have answers.</span>
                             </div>
                         </div>
                     </div>
@@ -26,8 +24,8 @@
                             <form action="/users/login" method="POST" enctype="multipart/form-data">
                                 <div class="control-group">
                                     <div class="form-group floating-label-form-group controls">
-                                        <label>User Name</label>
-                                        <input type="text" class="form-control" placeholder="User Name" id="username"
+                                        <label>Username</label>
+                                        <input type="text" class="form-control" placeholder="Username" id="username"
                                             name="username">
                                     </div>
                                 </div>
@@ -40,7 +38,7 @@
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <button type="submit" class="btn btn-primary" id="sendMessageButton">Login</button>
                                 </div>
                             </form>
                         </div>
@@ -49,8 +47,8 @@
             </main>
             <!-- Footer-->
             <%- include('layouts/footer') -%>
-                <%- include('layouts/script') -%>
-                    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+            <%- include('layouts/script') -%>
+            <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
 
 </html>
