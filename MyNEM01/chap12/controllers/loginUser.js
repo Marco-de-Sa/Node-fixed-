@@ -6,17 +6,22 @@ module.exports = (req, res) => {
     User.findOne({ username: username }, (error, user) => {
         if (user) {
             bcrypt.compare(password, user.password, (error, same) => {
-                if (same) { // if passwords match
-                    // store user session, will talk about it later
-                    res.redirect('/')
+                if (same) {
+                    // we assign the user id to the session
+                    // the session package saves this data on the user's browser so that each time the user 
+                    // makes a request, this cookie will be sent back to the server with the authenticated id
+                    req.session.userId = user._id;
+                    return res.redirect('/');
                 }
                 else {
-                    res.redirect('/auth/login')
+                    console.log(error);
+                    res.redirect('/auth/login');
                 }
-            })
+            });
         }
         else {
-            res.redirect('/auth/login')
+            console.log(error);
+            res.redirect('/auth/login');
         }
-    })
+    });
 }
