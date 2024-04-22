@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 // create a new Express application
 const app = new express();
+const flash = require('connect-flash');
 
 // Controllers
 const homeController = require('./controllers/home');
@@ -41,7 +42,8 @@ global.loggedIn = null;
 app.use("*", (req, res, next) => {
     loggedIn = req.session.userId;
     next();
-})
+});
+app.use(flash());
 
 // With app.set('view engine','ejs'), we tell Express to use EJS as our templating engine, 
 // that any file ending in .ejs should be rendered with the EJS package.

@@ -10,6 +10,6 @@ module.exports = (req, res) => {
             username: req.body.username,
             image: '/img/' + image.name
         });
-        res.redirect('/')
+        res.redirect('/');
     });
 };
