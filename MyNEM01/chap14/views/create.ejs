@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('layouts/header') -%>
+
     <body>
         <!-- Navigation-->
         <%- include('layouts/navbar') -%>
@@ -33,6 +34,13 @@
                                     <div class="form-group floating-label-form-group controls">
                                         <label>Description</label>
                                         <textarea rows="5" class="form-control" id="body" name="body"></textarea>
+                                        <script>
+                                            $('#body').summernote({
+                                                placeholder: 'Hello bootstrap 4',
+                                                tabsize: 2,
+                                                height: 200
+                                            });
+                                        </script>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -52,8 +60,8 @@
             </main>
             <!-- Footer-->
             <%- include('layouts/footer') -%>
-            <%- include('layouts/script') -%>
-            <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+                <%- include('layouts/script') -%>
+                    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
 
 </html>
